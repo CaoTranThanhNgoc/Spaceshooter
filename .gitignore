@@ -1,0 +1,47 @@
+# Unity-generated folders (rebuilt by the editor)
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/UIShots/
+
+# Asset-store / package import leftovers
+/[Aa]ssets/[Aa]ssets[Ss]tore[Tt]ools*
+/[Aa]ssets/_Recovery*
+/[Aa]ssets/InitTestScene*
+
+# IDE / generated project files (Unity regenerates them)
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# Build outputs and logs
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.log
+sysinfo.txt
+crashlytics-build.properties
+
+# Local secrets: keep key material out of the repository
+*.keystore
+*.jks
+.env
+.env.*
+
+# Android CMake / Gradle scratch
+/.utmp/

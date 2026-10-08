@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: fad09a5d5e318ca46ad8ccf2b37f9c87
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3738918954416705794
+    second: asteroid_04_cracks_0
+  - first:
+      213: 7469274794666150172
+    second: asteroid_04_cracks_1
+  - first:
+      213: -5920573533807040194
+    second: asteroid_04_cracks_2
+  - first:
+      213: 4680422769951974534
+    second: asteroid_04_cracks_3
+  - first:
+      213: -1310079884677886702
+    second: asteroid_04_cracks_4
+  - first:
+      213: -8232090876384283018
+    second: asteroid_04_cracks_5
+  - first:
+      213: 8114306908406095377
+    second: asteroid_04_cracks_6
+  - first:
+      213: 8558267198901084560
+    second: asteroid_04_cracks_7
+  - first:
+      213: 2988440433333267515
+    second: asteroid_04_cracks_8
+  - first:
+      213: -4414963661070185024
+    second: asteroid_04_cracks_9
+  - first:
+      213: -9122170077787980745
+    second: asteroid_04_cracks_10
+  - first:
+      213: 5969733535445791443
+    second: asteroid_04_cracks_11
+  - first:
+      213: 3019481892917047271
+    second: asteroid_04_cracks_12
+  - first:
+      213: 6058320893406900247
+    second: asteroid_04_cracks_13
+  - first:
+      213: 3514244148864328575
+    second: asteroid_04_cracks_14
+  - first:
+      213: -9067433514122371298
+    second: asteroid_04_cracks_15
+  - first:
+      213: 1271219008925674903
+    second: asteroid_04_cracks_16
+  - first:
+      213: -1824116421696065550
+    second: asteroid_04_cracks_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 650
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: asteroid_04_cracks_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 306
+        width: 344
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efe64064501bc1cc0800000000000000
+      internalID: -3738918954416705794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_1
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 496
+        width: 77
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c19cad11ad138a760800000000000000
+      internalID: 7469274794666150172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_2
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 415
+        width: 102
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e392ad25db5e5dda0800000000000000
+      internalID: -5920573533807040194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_3
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 402
+        width: 79
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68423a916b334f040800000000000000
+      internalID: 4680422769951974534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_4
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 431
+        width: 66
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21dc3663949a1dde0800000000000000
+      internalID: -1310079884677886702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_5
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 353
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6767162a6fcb1cd80800000000000000
+      internalID: -8232090876384283018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_6
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 320
+        width: 24
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11e1b0a442fcb9070800000000000000
+      internalID: 8114306908406095377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 84
+        width: 102
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 091606b7ca215c670800000000000000
+      internalID: 8558267198901084560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_8
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 25
+        width: 217
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3c6e3d9db2197920800000000000000
+      internalID: 2988440433333267515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_9
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 84
+        width: 102
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd47a511f5eab2c0800000000000000
+      internalID: -4414963661070185024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_10
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 75
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73cffb445aa876180800000000000000
+      internalID: -9122170077787980745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_11
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 25
+        width: 217
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d2bbff7501c8d250800000000000000
+      internalID: 5969733535445791443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_12
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 53
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ef6b01a8ca57e920800000000000000
+      internalID: 3019481892917047271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_13
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 42
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71078d211ca731450800000000000000
+      internalID: 6058320893406900247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_14
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 20
+        width: 24
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f73ad032f6a15c030800000000000000
+      internalID: 3514244148864328575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_15
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 53
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1f934e92410a2280800000000000000
+      internalID: -9067433514122371298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_16
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 42
+        width: 48
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79d2db214f644a110800000000000000
+      internalID: 1271219008925674903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: asteroid_04_cracks_17
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 20
+        width: 24
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ff69df67cf6fa6e0800000000000000
+      internalID: -1824116421696065550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      asteroid_04_cracks_0: -3738918954416705794
+      asteroid_04_cracks_1: 7469274794666150172
+      asteroid_04_cracks_10: -9122170077787980745
+      asteroid_04_cracks_11: 5969733535445791443
+      asteroid_04_cracks_12: 3019481892917047271
+      asteroid_04_cracks_13: 6058320893406900247
+      asteroid_04_cracks_14: 3514244148864328575
+      asteroid_04_cracks_15: -9067433514122371298
+      asteroid_04_cracks_16: 1271219008925674903
+      asteroid_04_cracks_17: -1824116421696065550
+      asteroid_04_cracks_2: -5920573533807040194
+      asteroid_04_cracks_3: 4680422769951974534
+      asteroid_04_cracks_4: -1310079884677886702
+      asteroid_04_cracks_5: -8232090876384283018
+      asteroid_04_cracks_6: 8114306908406095377
+      asteroid_04_cracks_7: 8558267198901084560
+      asteroid_04_cracks_8: 2988440433333267515
+      asteroid_04_cracks_9: -4414963661070185024
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

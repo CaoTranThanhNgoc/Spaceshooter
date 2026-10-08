@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da8ce5894491e94c9ec9301af3924c2, type: 3}
+  m_Name: LevelDatabase
+  m_EditorClassIdentifier: SpaceHawk.Runtime::SpaceHawk.Data.LevelDatabase
+  levels:
+  - {fileID: 11400000, guid: 4b4b6c195ec997943a82d7ffe5314d11, type: 2}
+  - {fileID: 11400000, guid: 1ac3c06cddfa9a349bc8f9eff7cb6268, type: 2}
+  - {fileID: 11400000, guid: afbbb7485c55f5644bf1cc597b81508b, type: 2}
+  - {fileID: 11400000, guid: 06f08c916a47a504c8a887f2ee25068a, type: 2}
+  - {fileID: 11400000, guid: 0a7328172bb510840916f8d8c8c3dd26, type: 2}
+  - {fileID: 11400000, guid: b6f5f2e8cef4fe840bc3b9386ac39b75, type: 2}
+  - {fileID: 11400000, guid: 769ae5026fee8cd49a45e86b097411ed, type: 2}
+  - {fileID: 11400000, guid: 57e74cb33e94b50429195a0132101571, type: 2}
+  - {fileID: 11400000, guid: d51d2c7085dc08a4898660f1d1055fdc, type: 2}
+  - {fileID: 11400000, guid: 28b91e41a4b831c45ad182d25cb7463c, type: 2}
+  - {fileID: 11400000, guid: fea2e7bd41241744a8c5cb84c8b3ae6a, type: 2}
+  - {fileID: 11400000, guid: 4c454f6162e3f164898323c74624f951, type: 2}
+  - {fileID: 11400000, guid: e38a2f1cd8f01644c8551547cf7b3fcb, type: 2}
+  - {fileID: 11400000, guid: 6934677e374f98544ba0f19d2b6f6e8b, type: 2}

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03012808cc6c8324683e453eca10e682, type: 3}
+  m_Name: Level_06
+  m_EditorClassIdentifier: SpaceHawk.Runtime::SpaceHawk.Data.LevelData
+  levelId: level_06
+  displayNumber: 6
+  energyCost: 2
+  crystalReward: 70
+  waves:
+  - kind: 0
+    count: 10
+    spawnInterval: 0.55
+    hp: 70
+    speed: 2.2
+    fireInterval: 1.4
+    bulletDamage: 10
+    delayBeforeWave: 0
+  - kind: 1
+    count: 6
+    spawnInterval: 1.05
+    hp: 125
+    speed: 1.6
+    fireInterval: 1.3
+    bulletDamage: 15
+    delayBeforeWave: 3
+  - kind: 0
+    count: 10
+    spawnInterval: 0.5
+    hp: 75
+    speed: 2.3
+    fireInterval: 1.3
+    bulletDamage: 11
+    delayBeforeWave: 3
+  - kind: 1
+    count: 7
+    spawnInterval: 1
+    hp: 130
+    speed: 1.6
+    fireInterval: 1.2
+    bulletDamage: 16
+    delayBeforeWave: 3
+  isEndless: 0
+  requiredKillRatio: 0.6
+  mapPage: 0
+  mapAnchor: {x: 0.665, y: 0.44}
+  backgroundSetIndex: 1
+  levelTintColor: {r: 0.85, g: 0.75, b: 1, a: 1}

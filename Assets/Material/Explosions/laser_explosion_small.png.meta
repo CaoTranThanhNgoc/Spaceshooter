@@ -1,0 +1,1794 @@
+fileFormatVersion: 2
+guid: 7b6ad1a3a614a344da5e59543986cfdb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3516213852674665542
+    second: laser_explosion_small_0
+  - first:
+      213: 3352907121276396860
+    second: laser_explosion_small_1
+  - first:
+      213: -825789427141911163
+    second: laser_explosion_small_2
+  - first:
+      213: -6936840442128943027
+    second: laser_explosion_small_3
+  - first:
+      213: 4463398742713522851
+    second: laser_explosion_small_4
+  - first:
+      213: 6790212495117137528
+    second: laser_explosion_small_5
+  - first:
+      213: 5924869524268648601
+    second: laser_explosion_small_6
+  - first:
+      213: -91932290759440309
+    second: laser_explosion_small_7
+  - first:
+      213: -1921881000156144659
+    second: laser_explosion_small_8
+  - first:
+      213: -1852000954502411147
+    second: laser_explosion_small_9
+  - first:
+      213: 8120641643916795305
+    second: laser_explosion_small_10
+  - first:
+      213: -1899940048196042054
+    second: laser_explosion_small_11
+  - first:
+      213: -6436454252276095653
+    second: laser_explosion_small_12
+  - first:
+      213: 2255652893860136082
+    second: laser_explosion_small_13
+  - first:
+      213: -4457399348754239154
+    second: laser_explosion_small_14
+  - first:
+      213: 6758220121425534539
+    second: laser_explosion_small_15
+  - first:
+      213: -2496152402725519521
+    second: laser_explosion_small_16
+  - first:
+      213: 7970428205553430388
+    second: laser_explosion_small_17
+  - first:
+      213: -1433438269443631985
+    second: laser_explosion_small_18
+  - first:
+      213: 5501754147707974893
+    second: laser_explosion_small_19
+  - first:
+      213: 8189586826097936013
+    second: laser_explosion_small_20
+  - first:
+      213: -1928361207466451847
+    second: laser_explosion_small_21
+  - first:
+      213: -3608320110196064540
+    second: laser_explosion_small_22
+  - first:
+      213: -1598383035030156958
+    second: laser_explosion_small_23
+  - first:
+      213: -4495673400979832191
+    second: laser_explosion_small_24
+  - first:
+      213: 7448619152684668032
+    second: laser_explosion_small_25
+  - first:
+      213: 4728836194790422181
+    second: laser_explosion_small_26
+  - first:
+      213: -8529448806409527444
+    second: laser_explosion_small_27
+  - first:
+      213: 6745572437915999042
+    second: laser_explosion_small_28
+  - first:
+      213: -6193827261856736776
+    second: laser_explosion_small_29
+  - first:
+      213: -1339398387328976430
+    second: laser_explosion_small_30
+  - first:
+      213: -8436315163904573898
+    second: laser_explosion_small_31
+  - first:
+      213: 3180298818290355411
+    second: laser_explosion_small_32
+  - first:
+      213: 5000789923237023397
+    second: laser_explosion_small_33
+  - first:
+      213: -5207904583847886827
+    second: laser_explosion_small_34
+  - first:
+      213: -2719804169006552875
+    second: laser_explosion_small_35
+  - first:
+      213: -5517117460542130848
+    second: laser_explosion_small_36
+  - first:
+      213: 6964958950605208931
+    second: laser_explosion_small_37
+  - first:
+      213: -8291287380439158013
+    second: laser_explosion_small_38
+  - first:
+      213: -5246134657961548809
+    second: laser_explosion_small_39
+  - first:
+      213: 8978106645310733056
+    second: laser_explosion_small_40
+  - first:
+      213: 5766470007821797832
+    second: laser_explosion_small_41
+  - first:
+      213: -8397516348762693479
+    second: laser_explosion_small_42
+  - first:
+      213: -9159776250167448341
+    second: laser_explosion_small_43
+  - first:
+      213: -1959225948112706531
+    second: laser_explosion_small_44
+  - first:
+      213: -6329277924283580165
+    second: laser_explosion_small_45
+  - first:
+      213: 6265707864670878045
+    second: laser_explosion_small_46
+  - first:
+      213: -5808449658275986859
+    second: laser_explosion_small_47
+  - first:
+      213: -8976030756230448895
+    second: laser_explosion_small_48
+  - first:
+      213: 7216012371071153063
+    second: laser_explosion_small_49
+  - first:
+      213: 9123734906949454204
+    second: laser_explosion_small_50
+  - first:
+      213: -4946103164329082219
+    second: laser_explosion_small_51
+  - first:
+      213: -1087843631940623325
+    second: laser_explosion_small_52
+  - first:
+      213: -689507117714281730
+    second: laser_explosion_small_53
+  - first:
+      213: -5699717094412613416
+    second: laser_explosion_small_54
+  - first:
+      213: -3236725074044409501
+    second: laser_explosion_small_55
+  - first:
+      213: 1227787373753553070
+    second: laser_explosion_small_56
+  - first:
+      213: -6091877203204073710
+    second: laser_explosion_small_57
+  - first:
+      213: 8454902780475133644
+    second: laser_explosion_small_58
+  - first:
+      213: 4734280322490985960
+    second: laser_explosion_small_59
+  - first:
+      213: 9086664041246324136
+    second: laser_explosion_small_60
+  - first:
+      213: 161162540081088021
+    second: laser_explosion_small_61
+  - first:
+      213: -2342221931641457649
+    second: laser_explosion_small_62
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 650
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: laser_explosion_small_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 288
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab3d4057126e33fc0800000000000000
+      internalID: -3516213852674665542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 284
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c35ae88234be78e20800000000000000
+      internalID: 3352907121276396860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_2
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 280
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58ddee724e43a84f0800000000000000
+      internalID: -825789427141911163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_3
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 276
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d48375fee546bbf90800000000000000
+      internalID: -6936840442128943027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_4
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 272
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa5d56228d21fd30800000000000000
+      internalID: 4463398742713522851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_5
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 273
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87630e8c94eab3e50800000000000000
+      internalID: 6790212495117137528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_6
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 275
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9980296e07d593250800000000000000
+      internalID: 5924869524268648601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_7
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 280
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4845e1911469bef0800000000000000
+      internalID: -91932290759440309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_8
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 298
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: debde15b96b1455e0800000000000000
+      internalID: -1921881000156144659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_9
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 243
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57c0337b1fe5c46e0800000000000000
+      internalID: -1852000954502411147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_10
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 239
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ad97e5dc8052b070800000000000000
+      internalID: 8120641643916795305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_11
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 235
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab28cbca79e02a5e0800000000000000
+      internalID: -1899940048196042054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_12
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 231
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b55e70895fe1da6a0800000000000000
+      internalID: -6436454252276095653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_13
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 227
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2948d132b50bd4f10800000000000000
+      internalID: 2255652893860136082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_14
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 228
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e41327b98e22422c0800000000000000
+      internalID: -4457399348754239154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_15
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 230
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4e5773d4650acd50800000000000000
+      internalID: 6758220121425534539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_16
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 235
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5fbe4a6d92eb5dd0800000000000000
+      internalID: -2496152402725519521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_17
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 253
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47f24cb4936ac9e60800000000000000
+      internalID: 7970428205553430388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_18
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 198
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f849c561d776b1ce0800000000000000
+      internalID: -1433438269443631985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_19
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 194
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de47aaf6f382a5c40800000000000000
+      internalID: 5501754147707974893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_20
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 190
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8649caf3d147a170800000000000000
+      internalID: 8189586826097936013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_21
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 186
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97c915ed2b51d35e0800000000000000
+      internalID: -1928361207466451847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_22
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 182
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ee7ddb3afbacedc0800000000000000
+      internalID: -3608320110196064540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_23
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 183
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2694406291761d9e0800000000000000
+      internalID: -1598383035030156958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_24
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 185
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 182cc646cd82c91c0800000000000000
+      internalID: -4495673400979832191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_25
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 190
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 084d0f6a7afce5760800000000000000
+      internalID: 7448619152684668032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_26
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 208
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a63e77f67330a140800000000000000
+      internalID: 4728836194790422181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_27
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 153
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6f9414608f41a980800000000000000
+      internalID: -8529448806409527444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_28
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 149
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24b16a884661d9d50800000000000000
+      internalID: 6745572437915999042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_29
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 145
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f916e0fbea1b0aa0800000000000000
+      internalID: -6193827261856736776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_30
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 141
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d9768e5340896de0800000000000000
+      internalID: -1339398387328976430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_31
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 137
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63ef9325e003cea80800000000000000
+      internalID: -8436315163904573898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_32
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 138
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dc8acfdce0b22c20800000000000000
+      internalID: 3180298818290355411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_33
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 140
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ae45ea90ff566540800000000000000
+      internalID: 5000789923237023397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_34
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 145
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5104e97af5ec9b7b0800000000000000
+      internalID: -5207904583847886827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_35
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 163
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d8ecb7b480514ad0800000000000000
+      internalID: -2719804169006552875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_36
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 108
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 065f74c86e24f63b0800000000000000
+      internalID: -5517117460542130848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_37
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 104
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36d300e734188a060800000000000000
+      internalID: 6964958950605208931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_38
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 100
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 303be3e7e0e6fec80800000000000000
+      internalID: -8291287380439158013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_39
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 96
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f32654e25cf137b0800000000000000
+      internalID: -5246134657961548809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_40
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 92
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00bf1550d64a89c70800000000000000
+      internalID: 8978106645310733056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_41
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 93
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c989288bed960050800000000000000
+      internalID: 5766470007821797832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_42
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 95
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 990e67c6f57067b80800000000000000
+      internalID: -8397516348762693479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_43
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 100
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beca5b2f700f1e080800000000000000
+      internalID: -9159776250167448341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_44
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 118
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d14a300716e6fc4e0800000000000000
+      internalID: -1959225948112706531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_45
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 63
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf00b560343e928a0800000000000000
+      internalID: -6329277924283580165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_46
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 59
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5934141b1444f650800000000000000
+      internalID: 6265707864670878045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_47
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 55
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55288be6fcd346fa0800000000000000
+      internalID: -5808449658275986859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_48
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 51
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10937e1959bbe6380800000000000000
+      internalID: -8976030756230448895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_49
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 47
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a33588f40d642460800000000000000
+      internalID: 7216012371071153063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_50
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 48
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c79cd89ee840e9e70800000000000000
+      internalID: 9123734906949454204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_51
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 50
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592cabba069eb5bb0800000000000000
+      internalID: -4946103164329082219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_52
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 55
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 324220bfaf337e0f0800000000000000
+      internalID: -1087843631940623325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_53
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 73
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efa698afde06e66f0800000000000000
+      internalID: -689507117714281730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_54
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 18
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d88053408986e0b0800000000000000
+      internalID: -5699717094412613416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_55
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 14
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 369abfda1b7d413d0800000000000000
+      internalID: -3236725074044409501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_56
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 10
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea05a408c1af90110800000000000000
+      internalID: 1227787373753553070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_57
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 6
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21798b7b5fd457ba0800000000000000
+      internalID: -6091877203204073710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_58
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 2
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccecea86849d55570800000000000000
+      internalID: 8454902780475133644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_59
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 3
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ed6239beda83b140800000000000000
+      internalID: 4734280322490985960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_60
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 5
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a57dc36dc05a1e70800000000000000
+      internalID: 9086664041246324136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_61
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 10
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51602a0f9709c3200800000000000000
+      internalID: 161162540081088021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_explosion_small_62
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 28
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f04b1631091ce7fd0800000000000000
+      internalID: -2342221931641457649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      laser_explosion_small_0: -3516213852674665542
+      laser_explosion_small_1: 3352907121276396860
+      laser_explosion_small_10: 8120641643916795305
+      laser_explosion_small_11: -1899940048196042054
+      laser_explosion_small_12: -6436454252276095653
+      laser_explosion_small_13: 2255652893860136082
+      laser_explosion_small_14: -4457399348754239154
+      laser_explosion_small_15: 6758220121425534539
+      laser_explosion_small_16: -2496152402725519521
+      laser_explosion_small_17: 7970428205553430388
+      laser_explosion_small_18: -1433438269443631985
+      laser_explosion_small_19: 5501754147707974893
+      laser_explosion_small_2: -825789427141911163
+      laser_explosion_small_20: 8189586826097936013
+      laser_explosion_small_21: -1928361207466451847
+      laser_explosion_small_22: -3608320110196064540
+      laser_explosion_small_23: -1598383035030156958
+      laser_explosion_small_24: -4495673400979832191
+      laser_explosion_small_25: 7448619152684668032
+      laser_explosion_small_26: 4728836194790422181
+      laser_explosion_small_27: -8529448806409527444
+      laser_explosion_small_28: 6745572437915999042
+      laser_explosion_small_29: -6193827261856736776
+      laser_explosion_small_3: -6936840442128943027
+      laser_explosion_small_30: -1339398387328976430
+      laser_explosion_small_31: -8436315163904573898
+      laser_explosion_small_32: 3180298818290355411
+      laser_explosion_small_33: 5000789923237023397
+      laser_explosion_small_34: -5207904583847886827
+      laser_explosion_small_35: -2719804169006552875
+      laser_explosion_small_36: -5517117460542130848
+      laser_explosion_small_37: 6964958950605208931
+      laser_explosion_small_38: -8291287380439158013
+      laser_explosion_small_39: -5246134657961548809
+      laser_explosion_small_4: 4463398742713522851
+      laser_explosion_small_40: 8978106645310733056
+      laser_explosion_small_41: 5766470007821797832
+      laser_explosion_small_42: -8397516348762693479
+      laser_explosion_small_43: -9159776250167448341
+      laser_explosion_small_44: -1959225948112706531
+      laser_explosion_small_45: -6329277924283580165
+      laser_explosion_small_46: 6265707864670878045
+      laser_explosion_small_47: -5808449658275986859
+      laser_explosion_small_48: -8976030756230448895
+      laser_explosion_small_49: 7216012371071153063
+      laser_explosion_small_5: 6790212495117137528
+      laser_explosion_small_50: 9123734906949454204
+      laser_explosion_small_51: -4946103164329082219
+      laser_explosion_small_52: -1087843631940623325
+      laser_explosion_small_53: -689507117714281730
+      laser_explosion_small_54: -5699717094412613416
+      laser_explosion_small_55: -3236725074044409501
+      laser_explosion_small_56: 1227787373753553070
+      laser_explosion_small_57: -6091877203204073710
+      laser_explosion_small_58: 8454902780475133644
+      laser_explosion_small_59: 4734280322490985960
+      laser_explosion_small_6: 5924869524268648601
+      laser_explosion_small_60: 9086664041246324136
+      laser_explosion_small_61: 161162540081088021
+      laser_explosion_small_62: -2342221931641457649
+      laser_explosion_small_7: -91932290759440309
+      laser_explosion_small_8: -1921881000156144659
+      laser_explosion_small_9: -1852000954502411147
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
