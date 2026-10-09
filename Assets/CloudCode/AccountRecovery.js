@@ -12,7 +12,10 @@
 //                      account held it, it moves here (only its real owner could verify it)     (same player)
 //   requestReset     - send a 6-digit code to the contact registered for `username`            (any signed-in player, e.g. a guest)
 //   confirmReset     - check the code and set a new password via the Admin API                 (any signed-in player)
-//   deleteData       - purge the calling player's leaderboard scores, recovery data
+//   setName          - claim a display name: unique among all players (case / accents / punctuation do not
+//                      make a difference), and changeable once a week. `auto` = "true" for a name the game picks (signed-in player)
+//   getName          - the name on record for the caller and when it may be changed again           (signed-in player)
+//   deleteData       - purge the calling player's leaderboard scores, recovery data, display name
 //                      and Cloud Save items; the client then deletes the account itself        (signed-in player)
 //   selfCheck        - which secrets / channels are configured (booleans only, never values)    (signed-in player)
 // It always answers { ok: true } or { ok: false, error: "<code>" }; the client maps codes to texts.
@@ -41,6 +44,8 @@
 //   rp-<playerId>                 the id of that player's contact record (so deleting the account finds it)
 //   rv-<hash of contact+player>   a pending verification: { codeHash, expiresAt, sentAt, attempts, verifiedAt }
 //   rl-<hash of contact>          send limiter: { windowStart, count }  (at most 6 messages per contact per hour)
+//   nk-<hash of name key>         who holds a display name: { playerId, name }
+//   np-<playerId>                 that player's name record: { name, key, changedAt }  (changedAt 0 = never chosen by hand)
 
 const axios = require("axios-1.6");
 const { DataApi } = require("@unity-services/cloud-save-1.4");
@@ -122,7 +127,29 @@ function isStrongPassword(password) {
   return p.length >= 8 && p.length <= 30 && /[A-Z]/.test(p) && /[a-z]/.test(p) && /[0-9]/.test(p) && /[^A-Za-z0-9]/.test(p);
 }
 
+// ---- display names: the rules, and the key two names are compared by --------------------------------------
+// A name is 3-16 characters: letters (any script), digits and . _ - (no spaces: Unity's player-name service does not take
+// them, and the name on the Leaderboard must be exactly this one). Two names COLLIDE when they only differ in case,
+// accents or punctuation ("Ngoc", "ngoc" and "N.g-o.c" are the same name), so nobody can pose as another player.
+const NAME_MIN = 3;
+const NAME_MAX = 16;
+const NAME_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;   // one change per week
+
+function cleanDisplayName(raw) {
+  const name = String(raw || "").trim();
+  const length = Array.from(name).length;
+  if (length < NAME_MIN || length > NAME_MAX) return null;
+  if (!/^[\p{L}\p{N}._-]+$/u.test(name)) return null;
+  return name;
+}
+
+function nameKey(name) {
+  return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\u0111/gi, "d").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+}
+
 const contactRecordId = (contact) => "rc-" + sha256("contact:" + contact).slice(0, 32);
+const nameOwnerId = (key) => "nk-" + sha256("name:" + key).slice(0, 32);
+const nameRecordId = (playerId) => "np-" + playerId;
 const playerPointerId = (playerId) => "rp-" + playerId;
 const verificationId = (contactId, playerId) => "rv-" + sha256("verify:" + contactId + ":" + playerId).slice(0, 32);
 const limiterId = (contactId) => "rl-" + contactId.slice(3);
@@ -174,6 +201,19 @@ function storage(context) {
       return raw ? (typeof raw === "string" ? JSON.parse(raw) : raw) : null;
     },
     saveLimiter: (contactId, window) => write(limiterId(contactId), "window", JSON.stringify(window)),
+    // display names: nk-<key> says who holds a name, np-<playerId> is that player's own record
+    async getNameOwner(key) {
+      const raw = await read(nameOwnerId(key), "owner");
+      return raw ? (typeof raw === "string" ? JSON.parse(raw) : raw) : null;
+    },
+    saveNameOwner: (key, owner) => write(nameOwnerId(key), "owner", JSON.stringify(owner)),
+    removeNameOwner: (key) => remove(nameOwnerId(key)),
+    async getNameRecord(playerId) {
+      const raw = await read(nameRecordId(playerId), "record");
+      return raw ? (typeof raw === "string" ? JSON.parse(raw) : raw) : null;
+    },
+    saveNameRecord: (playerId, record) => write(nameRecordId(playerId), "record", JSON.stringify(record)),
+    removeNameRecord: (playerId) => remove(nameRecordId(playerId)),
     getPointer: (playerId) => read(playerPointerId(playerId), "contactId"),
     savePointer: (playerId, contactId) => write(playerPointerId(playerId), "contactId", contactId),
     removeContact: remove,
@@ -196,11 +236,11 @@ async function sendCode(secretManager, logger, contact, code, purpose) {
   const subject = verify ? "Space Hawk - your verification code" : "Space Hawk - your password reset code";
   const text = verify
     ? "Your Space Hawk verification code is " + code + ". It expires in 10 minutes.\n" +
-      "Mã xác minh Space Hawk của bạn là " + code + ". Mã hết hạn sau 10 phút.\n" +
-      "If you did not ask for this, ignore this message. / Nếu bạn không yêu cầu, hãy bỏ qua tin nhắn này."
+      "M\u00e3 x\u00e1c minh Space Hawk c\u1ee7a b\u1ea1n l\u00e0 " + code + ". M\u00e3 h\u1ebft h\u1ea1n sau 10 ph\u00fat.\n" +
+      "If you did not ask for this, ignore this message. / N\u1ebfu b\u1ea1n kh\u00f4ng y\u00eau c\u1ea7u, h\u00e3y b\u1ecf qua tin nh\u1eafn n\u00e0y."
     : "Your Space Hawk password reset code is " + code + ". It expires in 10 minutes.\n" +
-      "Mã đặt lại mật khẩu Space Hawk của bạn là " + code + ". Mã hết hạn sau 10 phút.\n" +
-      "If you did not ask for this, ignore this message. / Nếu bạn không yêu cầu, hãy bỏ qua tin nhắn này.";
+      "M\u00e3 \u0111\u1eb7t l\u1ea1i m\u1eadt kh\u1ea9u Space Hawk c\u1ee7a b\u1ea1n l\u00e0 " + code + ". M\u00e3 h\u1ebft h\u1ea1n sau 10 ph\u00fat.\n" +
+      "If you did not ask for this, ignore this message. / N\u1ebfu b\u1ea1n kh\u00f4ng y\u00eau c\u1ea7u, h\u00e3y b\u1ecf qua tin nh\u1eafn n\u00e0y.";
 
   // The Gmail relay: a small Google Apps Script web app that mails from the owner's own account.
   const relayUrl = await optionalSecret(secretManager, "MAIL_RELAY_URL");
@@ -465,12 +505,69 @@ async function selfCheck(context, secretManager) {
   const adminAuthStatus = await probeAdminAuth(context, secretManager);
   return {
     ok: true,
+    names: true,   // this version of the script knows the display-name actions (setName / getName)
     adminAuth: await has("UGS_ADMIN_AUTH"),
     adminAuthWorks: adminAuthStatus >= 200 && adminAuthStatus < 300,
     adminAuthStatus,
     pepper: await has("RECOVERY_PEPPER"),
     email: (await has("MAIL_RELAY_URL")) && (await has("MAIL_RELAY_KEY")),
   };
+}
+
+// ----------------------------------------------------------------------------------- display names
+
+const nextNameChange = (record) => (record && record.changedAt ? Math.floor((record.changedAt + NAME_COOLDOWN_MS) / 1000) : 0);
+
+// A name record only counts while its owner still holds that name (a stale one - e.g. left behind by a
+// deletion that was cut short - must never block somebody else from using the name).
+async function stillHolds(store, playerId, key) {
+  const record = await store.getNameRecord(playerId);
+  return !!record && record.key === key;
+}
+
+// Claims `params.displayName` for the calling player: refused when another player holds it ("name_taken"), when it is
+// not a valid name ("invalid_name") or when the last change was less than a week ago ("name_cooldown" + retryAfter
+// in seconds). `params.auto` ("true") is for names the game picks itself (the first "PilotXXXX", the username a new account
+// starts with): they never start the weekly clock, so a player's first real choice is always free.
+async function setName(store, context, params) {
+  const name = cleanDisplayName(params.displayName);
+  const key = name ? nameKey(name) : "";
+  if (!name || Array.from(key).length < NAME_MIN) return { ok: false, error: "invalid_name" };
+
+  const auto = params.auto === true || params.auto === "true";   // a String parameter: "true" / "false"
+  const now = Date.now();
+  const mine = await store.getNameRecord(context.playerId);
+
+  if (mine && mine.name === name) return { ok: true, name, nextChangeAt: nextNameChange(mine) };
+  if (!auto && mine && mine.changedAt && now - mine.changedAt < NAME_COOLDOWN_MS) {
+    return { ok: false, error: "name_cooldown", retryAfter: Math.ceil((mine.changedAt + NAME_COOLDOWN_MS - now) / 1000) };
+  }
+
+  const owner = await store.getNameOwner(key);
+  if (owner && owner.playerId !== context.playerId && (await stillHolds(store, owner.playerId, key))) {
+    return { ok: false, error: "name_taken" };
+  }
+
+  // Claim, then read it back: if somebody wrote the same name in between, only one of the two stays the owner.
+  await store.saveNameOwner(key, { playerId: context.playerId, name });
+  const check = await store.getNameOwner(key);
+  if (!check || check.playerId !== context.playerId) return { ok: false, error: "name_taken" };
+
+  // The name held before is free again.
+  if (mine && mine.key !== key) {
+    const old = await store.getNameOwner(mine.key);
+    if (old && old.playerId === context.playerId) await store.removeNameOwner(mine.key);
+  }
+
+  const record = { name, key, changedAt: auto ? (mine ? mine.changedAt || 0 : 0) : now };
+  await store.saveNameRecord(context.playerId, record);
+  return { ok: true, name, nextChangeAt: nextNameChange(record) };
+}
+
+// The name the server has on record for the caller and when it may be changed again (0 = any time).
+async function getName(store, context) {
+  const record = await store.getNameRecord(context.playerId);
+  return { ok: true, name: record ? record.name : "", nextChangeAt: nextNameChange(record) };
 }
 
 async function deleteData(store, context, secretManager, logger) {
@@ -499,6 +596,13 @@ async function deleteData(store, context, secretManager, logger) {
       await store.removeVerification(contactId, context.playerId);
     }
     await store.removePointer(context.playerId);
+    // The display name goes with the account: it is free for other players again.
+    const nameRecord = await store.getNameRecord(context.playerId);
+    if (nameRecord) {
+      const holder = await store.getNameOwner(nameRecord.key);
+      if (holder && holder.playerId === context.playerId) await store.removeNameOwner(nameRecord.key);
+      await store.removeNameRecord(context.playerId);
+    }
     await store.removePlayerItems();
   } catch (err) {
     logger.error("Could not remove the stored account data: " + why(err), { "error.message": err.message });
@@ -517,6 +621,8 @@ module.exports = async ({ params, context, logger, secretManager }) => {
     case "setContact": return setContact(store, context, params);
     case "requestReset": return requestReset(store, context, params, secretManager, logger);
     case "confirmReset": return confirmReset(store, context, params, secretManager, logger);
+    case "setName": return setName(store, context, params);
+    case "getName": return getName(store, context);
     case "deleteData": return deleteData(store, context, secretManager, logger);
     case "selfCheck": return selfCheck(context, secretManager);
     default: return { ok: false, error: "unknown_action" };
@@ -529,4 +635,6 @@ module.exports.params = {
   contact: "String",
   code: "String",
   newPassword: "String",
+  displayName: "String",
+  auto: "String",
 };

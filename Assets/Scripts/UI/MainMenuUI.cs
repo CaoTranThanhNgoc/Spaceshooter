@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using SpaceHawk.Core;
 using SpaceHawk.Online;
 
 namespace SpaceHawk.UI
@@ -21,10 +22,13 @@ namespace SpaceHawk.UI
 
         private void Start()
         {
-            // The very first thing a brand-new player sees, before they ever touch Play - once
-            // resolved (guest name chosen, or an account linked), HasChosenName() stays true and
-            // this never appears again on later launches.
-            if (!LeaderboardManager.HasChosenName())
+            // Every profile has a display name from the start (a guest shows up under the same name here and
+            // on the Leaderboard).
+            SaveManager.EnsureDefaultName();
+
+            // The very first thing a brand-new player sees, before they ever touch Play - once answered
+            // (guest, account created or signed in) this device never shows it again, whatever happens later.
+            if (!SaveManager.HasChosenIdentity())
             {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/UI/AuthGatePanel");
                 if (prefab != null) Instantiate(prefab, overlayRoot != null ? overlayRoot : transform.parent);

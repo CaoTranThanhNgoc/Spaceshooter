@@ -14,6 +14,7 @@ namespace SpaceHawk.Online
         public class Report
         {
             public bool ok;
+            public bool names;            // the deployed script knows display names (an older deployment does not)
             public bool adminAuth;
             public bool adminAuthWorks;   // Unity accepted the stored credentials on a harmless read
             public int adminAuthStatus;   // the HTTP status of that read (0 = not tried)
@@ -53,6 +54,9 @@ namespace SpaceHawk.Online
             }
 
             text.Append("  Script AccountRecovery:   deployed and reachable\n");
+            text.Append(report.names
+                ? "  Display names:            supported (unique, one change a week)\n"
+                : "  Display names:            NOT in the deployed script - redeploy it (Tools/CloudCodeSetup/Deploy-CloudCode.ps1)\n");
             if (!report.adminAuth)
             {
                 text.Append("  UGS_ADMIN_AUTH:           MISSING - needed to reset passwords and to delete accounts (scores)\n");
@@ -73,7 +77,7 @@ namespace SpaceHawk.Online
                 ? "  E-mail codes:             ready\n"
                 : "  E-mail codes:             not ready - add MAIL_RELAY_URL + MAIL_RELAY_KEY (the Gmail relay, Tools/MailRelay/Code.gs)\n");
 
-            bool ready = report.adminAuth && report.adminAuthWorks && report.pepper && report.email;
+            bool ready = report.names && report.adminAuth && report.adminAuthWorks && report.pepper && report.email;
             text.Append(ready
                 ? "  => Ready: contacts can be verified, passwords reset and accounts deleted."
                 : "  => Not ready yet - fix the lines marked MISSING / not ready, then run the check again.");

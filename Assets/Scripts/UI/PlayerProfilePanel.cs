@@ -16,6 +16,8 @@ namespace SpaceHawk.UI
     public class PlayerProfilePanel : MonoBehaviour
     {
         public TMP_InputField nameInput;
+        [Tooltip("The line above the name field: what the name is for, or - while it cannot be changed yet - when it can.")]
+        public TMP_Text nameHintLabel;
         public Button confirmButton;
         public Button closeButton;
 
@@ -36,8 +38,25 @@ namespace SpaceHawk.UI
         public Button recoveryButton;
         public TMP_Text recoveryButtonLabel;
 
+        private bool _saving;
+        private bool _nameLocked;
+        private float _lockTimer;
+        private TMP_Text _confirmLabel;
+        private Color _confirmLabelColor = Color.white;
+        private Color _nameTextColor = Color.white;
+        private static readonly Color SwitchedOffTint = new Color(1f, 1f, 1f, 0.55f);
+        // The switched-off button is grey (the pack's Disable_Btn): its caption has to be dark to stay readable on it.
+        private static readonly Color SwitchedOffCaption = new Color(0.27f, 0.32f, 0.36f, 1f);
+
         private void Awake()
         {
+            if (confirmButton != null)
+            {
+                _confirmLabel = confirmButton.GetComponentInChildren<TMP_Text>();
+                if (_confirmLabel != null) _confirmLabelColor = _confirmLabel.color;
+            }
+            if (nameInput != null && nameInput.textComponent != null) _nameTextColor = nameInput.textComponent.color;
+
             if (confirmButton != null) confirmButton.onClick.AddListener(Confirm);
             if (closeButton != null) closeButton.onClick.AddListener(Close);
             if (registerButton != null) registerButton.onClick.AddListener(OpenRegister);
@@ -86,6 +105,7 @@ namespace SpaceHawk.UI
         {
             RefreshAccountStatus();
             RefreshStats();
+            RefreshNameHint();
         }
 
         // Fires when Register/SignIn succeeds from a LoginPanel/RegisterPanel opened ON TOP of
@@ -106,23 +126,73 @@ namespace SpaceHawk.UI
             if (energyLabel != null) energyLabel.text = $"{SaveManager.GetEnergy()}/{SaveManager.MaxEnergy}";
         }
 
+        // The name shown is the one the Leaderboard shows: every profile has one (the account name for a signed-in
+        // player, the game's "PilotXXXX" for a guest) until the player picks another.
         private void RefreshNameField()
         {
-            string current = SaveManager.GetPlayerName();
-            if (nameInput != null) nameInput.text = string.IsNullOrEmpty(current) ? LeaderboardManager.GenerateRandomName() : current;
+            if (nameInput != null) nameInput.text = LeaderboardManager.GetDisplayName();
+            RefreshNameLock();
+        }
+
+        // The name can be changed once a week. Until then the field and the button are switched off and the line above
+        // them counts down; the moment the wait is over they come back on by themselves.
+        private void RefreshNameLock()
+        {
+            long wait = SaveManager.GetNameChangeWaitSeconds();
+            _nameLocked = wait > 0;
+            bool canEdit = !_nameLocked && !_saving;
+            if (nameInput != null)
+            {
+                nameInput.interactable = canEdit;
+                if (nameInput.textComponent != null) nameInput.textComponent.color = canEdit ? _nameTextColor : _nameTextColor * SwitchedOffTint;
+            }
+            if (confirmButton != null) confirmButton.interactable = canEdit;
+            if (_confirmLabel != null) _confirmLabel.color = canEdit ? _confirmLabelColor : SwitchedOffCaption;
+            RefreshNameHint();
+        }
+
+        // While the weekly lock is on, the line above the name says when it ends; otherwise it says what the name is for.
+        private void RefreshNameHint()
+        {
+            if (nameHintLabel == null) return;
+            long wait = SaveManager.GetNameChangeWaitSeconds();
+            nameHintLabel.text = wait > 0
+                ? Localization.Format("profile.name_locked_fmt", PlayerNameRules.FormatWait(wait))
+                : Localization.Get("leaderboard.choose_name_desc");
+        }
+
+        private void Update()
+        {
+            if (!_nameLocked) return;
+            _lockTimer += Time.unscaledDeltaTime;
+            if (_lockTimer < 1f) return;
+            _lockTimer = 0f;
+            RefreshNameLock();   // keeps the countdown current and switches the field back on when the wait is over
         }
 
         private async void Confirm()
         {
-            string name = nameInput != null ? nameInput.text.Trim() : "";
-            if (string.IsNullOrEmpty(name)) name = LeaderboardManager.GenerateRandomName();
-            if (name.Length > 16) name = name.Substring(0, 16);
+            if (_nameLocked || _saving) return;
+            string typed = nameInput != null ? nameInput.text : "";
 
-            if (confirmButton != null) confirmButton.interactable = false;
-            await LeaderboardManager.SetPlayerName(name);
+            _saving = true;
+            RefreshNameLock();
+            NameService.ChangeResult result = await NameService.ChangeName(typed);
             if (this == null) return; // panel closed while the network call was in flight
+            _saving = false;
+            RefreshNameLock();
 
-            Close();
+            // The notice goes on the overlay root, so it survives this panel closing.
+            Transform noticeRoot = transform.parent != null ? transform.parent : transform;
+            if (result.ok)
+            {
+                ToastUI.ShowToast(noticeRoot, Localization.Get("profile.name_saved"));
+                Close();
+                return;
+            }
+
+            ToastUI.ShowToast(noticeRoot, NameService.ErrorText(result));
+            RefreshNameLock();
         }
 
         private void RefreshAccountStatus()

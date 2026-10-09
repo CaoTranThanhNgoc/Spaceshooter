@@ -283,7 +283,7 @@ namespace SpaceHawk.Tests
     public class AccountServerCheckTests
     {
         private static string Describe(bool admin, bool pepper, bool email) =>
-            AccountServerCheck.Describe(new AccountServerCheck.Report { ok = true, adminAuth = admin, adminAuthWorks = admin, adminAuthStatus = admin ? 200 : 0, pepper = pepper, email = email });
+            AccountServerCheck.Describe(new AccountServerCheck.Report { ok = true, names = true, adminAuth = admin, adminAuthWorks = admin, adminAuthStatus = admin ? 200 : 0, pepper = pepper, email = email });
 
         [Test]
         public void EverythingSet_IsReady()
@@ -313,17 +313,27 @@ namespace SpaceHawk.Tests
         }
 
         [Test]
+        public void AnOldDeployment_WithoutDisplayNames_IsNotReady_AndSaysToRedeploy()
+        {
+            string text = AccountServerCheck.Describe(new AccountServerCheck.Report
+            { ok = true, names = false, adminAuth = true, adminAuthWorks = true, adminAuthStatus = 200, pepper = true, email = true });
+            StringAssert.Contains("NOT in the deployed script", text);
+            StringAssert.Contains("Deploy-CloudCode.ps1", text);
+            StringAssert.Contains("Not ready", text);
+        }
+
+        [Test]
         public void ARejectedAdminCredential_IsNotReady_AndSaysWhy()
         {
             string text = AccountServerCheck.Describe(new AccountServerCheck.Report
-            { ok = true, adminAuth = true, adminAuthWorks = false, adminAuthStatus = 401, pepper = true, email = true });
+            { ok = true, names = true, adminAuth = true, adminAuthWorks = false, adminAuthStatus = 401, pepper = true, email = true });
             StringAssert.Contains("REJECTED", text);
             StringAssert.Contains("401", text);
             StringAssert.Contains("Not ready", text);
             StringAssert.DoesNotContain("Leaderboards Admin", text);
 
             string forbidden = AccountServerCheck.Describe(new AccountServerCheck.Report
-            { ok = true, adminAuth = true, adminAuthWorks = false, adminAuthStatus = 403, pepper = true, email = true });
+            { ok = true, names = true, adminAuth = true, adminAuthWorks = false, adminAuthStatus = 403, pepper = true, email = true });
             StringAssert.Contains("Leaderboards Admin", forbidden);
         }
 

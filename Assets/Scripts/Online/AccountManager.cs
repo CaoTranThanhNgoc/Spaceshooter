@@ -17,9 +17,10 @@ namespace SpaceHawk.Online
     /// list every time), so it can be recovered by signing in from any device instead of only
     /// existing anonymously on this one.
     ///
-    /// Guest and account progress are kept apart: when a guest signs in to (or creates) an account
-    /// the guest progress is put aside, and logging out brings it back - see
-    /// SaveManager.StashGuestProfile / RestoreGuestProfile.</summary>
+    /// Guest and account progress are kept apart. A guest who CREATES an account takes the progress along: it moves
+    /// into the account, and the guest that comes back after logging out starts fresh. A guest who SIGNS IN to an
+    /// existing account gets that account's progress; the guest's own is put aside and comes back on logging out -
+    /// see SaveManager.StashGuestProfile / RestoreGuestProfile. Each identity keeps its own cached session (AuthProfiles).</summary>
     public static class AccountManager
     {
         /// <summary>Highest level number a guest (no linked account) can play - the Leaderboard
@@ -74,15 +75,16 @@ namespace SpaceHawk.Online
             try
             {
                 await AuthenticationService.Instance.AddUsernamePasswordAsync(username, password);
-                // The guest progress becomes the new account's starting point - and a copy of it is
-                // kept as the guest profile, so logging out later returns to it.
-                SaveManager.StashGuestProfile();
+                // The guest identity has just BECOME the account (same player, same Leaderboard history): it keeps
+                // living in the slot the guest was in.
+                AuthProfiles.AccountSlot = AuthenticationService.Instance.Profile;
+                // The guest progress MOVES into the account - it is not copied back to the guest, so after logging
+                // out the guest starts fresh instead of showing what now belongs to the account.
                 SaveManager.SetAccountLinked(true, username);
                 RememberUsername(username);
-                // The username the player just chose IS a reasonable display name - default to it
-                // instead of a random "PilotXXXX" placeholder. Still fully editable afterward from
-                // the profile screen; this only fills it in when nothing better is set yet.
-                if (!LeaderboardManager.HasChosenName()) await LeaderboardManager.SetPlayerName(username);
+                // The account name is now the display name too (SaveManager did that when it linked the account,
+                // unless the player had chosen a name) - registered with the server and shown on the Leaderboard.
+                await NameService.EnsureRegistered();
                 // Back up whatever guest progress already exists under this brand-new account,
                 // so "create an account to keep your progress" is true from the moment it's made.
                 RecoveryResult saved = await Recovery.SetContact(username, canonical);
@@ -101,10 +103,10 @@ namespace SpaceHawk.Online
             }
         }
 
-        /// <summary>Switches to a DIFFERENT, already-registered identity (e.g. restoring an
-        /// account on a new device) - whatever anonymous session was active on this device is
-        /// discarded first, and the restored account's own remembered name replaces this
-        /// device's local one. The guest progress played so far is put aside, not overwritten.</summary>
+        /// <summary>Switches to a DIFFERENT, already-registered identity (e.g. restoring an account on a new
+        /// device). The guest identity stays cached in its own slot and the guest progress is put aside - both
+        /// come back on logging out. Nothing on this device changes until the account's progress has been
+        /// read: if that fails, the sign-in is undone and the guest carries on untouched.</summary>
         public static async Task<(bool success, string error)> SignIn(string username, string password)
         {
             await LeaderboardManager.EnsureInitialized();
@@ -112,36 +114,83 @@ namespace SpaceHawk.Online
 
             try
             {
-                if (AuthenticationService.Instance.IsSignedIn) AuthenticationService.Instance.SignOut(true);
+                // Keep the guest's session cached; the account gets a slot of its own.
+                AuthenticationService.Instance.SignOut(false);
                 LeaderboardManager.ResetSession();
+                AuthProfiles.Switch(AuthProfiles.SignedInSlot);
 
                 await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
+            }
+            catch (Exception e)
+            {
+                BackToGuestIdentity(clearAccountSession: false);
+                return (false, FriendlyError(e));
+            }
+
+            try
+            {
+                LeaderboardManager.MarkSignedIn();
+                CloudSaveManager.FetchResult cloud = await CloudSaveManager.FetchCloudSave();
+                if (cloud.status == CloudSaveManager.FetchStatus.Failed)
+                {
+                    // Not knowing what the account holds, pushing this device's progress could wipe it. Undo.
+                    BackToGuestIdentity(clearAccountSession: true);
+                    return (false, Localization.Get("account.error_sync_failed"));
+                }
+
                 SaveManager.StashGuestProfile();
                 SaveManager.SetAccountLinked(true, username);
+                AuthProfiles.AccountSlot = AuthProfiles.SignedInSlot;
                 RememberUsername(username);
-                LeaderboardManager.PullPlayerNameFromRemote();
-                // If this account has never had a name set remotely either, fall back to the
-                // username rather than leaving the player nameless.
-                if (!LeaderboardManager.HasChosenName()) await LeaderboardManager.SetPlayerName(username);
-                // The whole point of signing in on a (possibly new) device: restore THIS
-                // account's actual game progress, not just its identity/leaderboard name. If
-                // there's nothing in the cloud yet (this account never pushed before), the
-                // progress on this device becomes the account's and is backed up instead.
-                bool restored = await CloudSaveManager.PullFromCloud();
-                if (!restored) await CloudSaveManager.PushToCloud();
+
+                // The account's own name (from Unity's name service) replaces the guest's; an account that never
+                // had one starts with a name of its own, not the guest's.
+                if (!LeaderboardManager.PullPlayerNameFromRemote()) SaveManager.ClearPlayerName();
+
+                if (cloud.status == CloudSaveManager.FetchStatus.Found)
+                {
+                    // The whole point of signing in on a (possibly new) device: THIS account's progress.
+                    SaveManager.ApplyCloudData(cloud.json);
+                }
+                else
+                {
+                    // A brand-new account with nothing saved yet: the guest progress moves into it and is backed up.
+                    SaveManager.DiscardGuestStash();
+                    await CloudSaveManager.PushToCloud();
+                }
+
+                await NameService.EnsureRegistered();
                 AccountLinked?.Invoke();
                 return (true, null);
             }
             catch (Exception e)
             {
+                BackToGuestIdentity(clearAccountSession: true);
                 return (false, FriendlyError(e));
             }
         }
 
+        /// <summary>Undoes a sign-in that did not complete: forgets the account's session (when it was already
+        /// established) and points the service back at the guest slot - the guest identity was never touched.</summary>
+        private static void BackToGuestIdentity(bool clearAccountSession)
+        {
+            try
+            {
+                if (AuthenticationService.Instance.IsSignedIn) AuthenticationService.Instance.SignOut(clearAccountSession);
+                AuthProfiles.Switch(AuthProfiles.GuestSlot);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[AccountManager] Could not return to the guest identity: {e.Message}");
+            }
+            LeaderboardManager.ResetSession();
+        }
+
         /// <summary>Logs out: the account's progress is saved to the cloud first (so nothing played
         /// since the last sync is lost), then this device goes back to the guest profile it had
-        /// before signing in - the account's scores, ships and Crystals no longer show up in guest
-        /// play. The next online action creates a brand-new anonymous identity.</summary>
+        /// before signing in (or a fresh one when the progress moved into the account) - the account's scores,
+        /// ships and Crystals no longer show up in guest play. The guest identity of an account that was
+        /// signed in to comes back; one that was turned into the account is replaced by a new guest.</summary>
         public static async Task SignOut()
         {
             // Bounded, so a missing connection never leaves the player stuck on "logging out".
@@ -164,6 +213,7 @@ namespace SpaceHawk.Online
                 Debug.LogWarning($"[AccountManager] SignOut failed: {e.Message}");
             }
 
+            AuthProfiles.ForgetAccountSlot();
             SaveManager.RestoreGuestProfile();
             LeaderboardManager.ResetSession();
         }
@@ -193,6 +243,7 @@ namespace SpaceHawk.Online
             }
 
             ForgetUsername(username);
+            AuthProfiles.ForgetAccountSlot();
             SaveManager.RestoreGuestProfile();
             LeaderboardManager.ResetSession();
             return (true, null);

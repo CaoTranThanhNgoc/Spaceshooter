@@ -97,6 +97,7 @@ namespace SpaceHawk.UI
             Refresh();
             SaveManager.CrystalsChanged += OnCrystalsChanged;
             SaveManager.SelectedShipChanged += OnSelectedShipChanged;
+            SaveManager.ProfileChanged += OnProfileChanged;
             Localization.LanguageChanged += Refresh;
         }
 
@@ -104,7 +105,17 @@ namespace SpaceHawk.UI
         {
             SaveManager.CrystalsChanged -= OnCrystalsChanged;
             SaveManager.SelectedShipChanged -= OnSelectedShipChanged;
+            SaveManager.ProfileChanged -= OnProfileChanged;
             Localization.LanguageChanged -= Refresh;
+        }
+
+        // Another account / the guest took over while this is open: the ships, levels and balances are the other
+        // profile's now, and what was being previewed may not even be owned there.
+        private void OnProfileChanged()
+        {
+            if (this == null) return;
+            _preview = SaveManager.GetSelectedShip();
+            Refresh();
         }
 
         public int PreviewIndex => _preview < 0 ? SaveManager.GetSelectedShip() : _preview;

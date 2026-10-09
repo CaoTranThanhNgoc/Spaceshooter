@@ -22,12 +22,14 @@ namespace SpaceHawk.UI
         {
             Populate();
             SaveManager.EnemiesDestroyedChanged += OnProgressChanged;
+            SaveManager.ProfileChanged += Populate;   // another account / the guest took over while this is open
             Localization.LanguageChanged += Populate;
         }
 
         private void OnDisable()
         {
             SaveManager.EnemiesDestroyedChanged -= OnProgressChanged;
+            SaveManager.ProfileChanged -= Populate;
             Localization.LanguageChanged -= Populate;
         }
 

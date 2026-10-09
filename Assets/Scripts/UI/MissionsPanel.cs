@@ -25,12 +25,14 @@ namespace SpaceHawk.UI
         {
             Populate();
             DailyMissions.Changed += Populate;
+            SaveManager.ProfileChanged += Populate;   // another account / the guest took over while this is open
             Localization.LanguageChanged += Populate;
         }
 
         private void OnDisable()
         {
             DailyMissions.Changed -= Populate;
+            SaveManager.ProfileChanged -= Populate;
             Localization.LanguageChanged -= Populate;
         }
 

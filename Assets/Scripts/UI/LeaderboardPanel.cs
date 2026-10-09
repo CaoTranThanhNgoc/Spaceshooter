@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SpaceHawk.Core;
 using SpaceHawk.Online;
 
 namespace SpaceHawk.UI
@@ -24,7 +25,31 @@ namespace SpaceHawk.UI
         // Naming now happens up front on Level Select (see LevelSelectUI's player icon button and
         // its own first-visit auto-prompt) - by the time a player can even reach this panel, a
         // name already exists, so this just loads scores straight away.
-        private async void OnEnable()
+        private void OnEnable()
+        {
+            SaveManager.ProfileChanged += OnProfileChanged;
+            Load();
+        }
+
+        private void OnDisable()
+        {
+            SaveManager.ProfileChanged -= OnProfileChanged;
+        }
+
+        // Another account took over while the board is open: its rows and highlight are somebody else's now. A
+        // guest has no board at all (the way here is closed for guests), so the panel goes away.
+        private void OnProfileChanged()
+        {
+            if (this == null) return;
+            if (!AccountManager.IsLinked)
+            {
+                Close();
+                return;
+            }
+            Load();
+        }
+
+        private async void Load()
         {
             SetRowsActive(false);
             if (loadingLabel != null) loadingLabel.SetActive(true);

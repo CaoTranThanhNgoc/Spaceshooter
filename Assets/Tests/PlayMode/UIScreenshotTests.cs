@@ -280,6 +280,24 @@ namespace SpaceHawk.Tests.PlayMode
         }
 
         [UnityTest]
+        public IEnumerator PlayerProfile_NameLocked()
+        {
+            // The weekly name lock is on: the line above the name field says when it can change again.
+            SaveManager.Data.playerName = "TestPilot";
+            SaveManager.SetNameChangeUnlock(System.DateTimeOffset.UtcNow.ToUnixTimeSeconds() + 4 * 86400 + 7 * 3600);
+            yield return ShootPrefab("PlayerProfilePanel", null, "_namelocked");
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerProfile_FreshGuest()
+        {
+            // A guest nobody named yet: the game's own name is already in the field.
+            SaveManager.Data.playerName = "";
+            SaveManager.EnsureDefaultName();
+            yield return ShootPrefab("PlayerProfilePanel", null, "_freshguest");
+        }
+
+        [UnityTest]
         public IEnumerator PlayerProfile_SignedIn()
         {
             SaveManager.Data.playerName = "TestPilot";

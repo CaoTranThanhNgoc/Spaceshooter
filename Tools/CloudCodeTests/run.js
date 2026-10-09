@@ -22,7 +22,7 @@ function loadScript(env) {
     if (name === "@unity-services/cloud-save-1.4") return { DataApi: env.DataApi };
     throw new Error("Unexpected require: " + name);
   };
-  const wrapped = source + "\n;module.exports.__internals = { sha256, classifyContact, isStrongPassword };";
+  const wrapped = source + "\n;module.exports.__internals = { sha256, classifyContact, isStrongPassword, cleanDisplayName, nameKey };";
   vm.runInNewContext(wrapped, { module, exports: module.exports, require: fakeRequire, console, Date: env.Date }, { filename: scriptPath });
   return module.exports;
 }
@@ -466,7 +466,7 @@ async function test(name, fn) {
 
   await test("selfCheck reports what is configured, never the values", async () => {
     const full = makeRunner(makeEnv(), SECRETS);
-    assert.deepStrictEqual(await full.call("P1", { action: "selfCheck" }), { ok: true, adminAuth: true, adminAuthWorks: true, adminAuthStatus: 200, pepper: true, email: true });
+    assert.deepStrictEqual(await full.call("P1", { action: "selfCheck" }), { ok: true, names: true, adminAuth: true, adminAuthWorks: true, adminAuthStatus: 200, pepper: true, email: true });
 
     const noKey = Object.assign({}, SECRETS); delete noKey.MAIL_RELAY_KEY;
     assert.strictEqual((await makeRunner(makeEnv(), noKey).call("P1", { action: "selfCheck" })).email, false, "the relay needs both its URL and its key");
@@ -474,9 +474,9 @@ async function test(name, fn) {
     const partial = Object.assign({}, SECRETS); delete partial.UGS_ADMIN_AUTH;
     const r = makeRunner(makeEnv(), partial);
     const res = await r.call("P1", { action: "selfCheck" });
-    assert.deepStrictEqual(res, { ok: true, adminAuth: false, adminAuthWorks: false, adminAuthStatus: 0, pepper: true, email: true });
+    assert.deepStrictEqual(res, { ok: true, names: true, adminAuth: false, adminAuthWorks: false, adminAuthStatus: 0, pepper: true, email: true });
     assert.ok(!JSON.stringify(res).includes("pepper-for-tests"), "no secret value leaks");
-    assert.deepStrictEqual(await makeRunner(makeEnv(), {}).call("P1", { action: "selfCheck" }), { ok: true, adminAuth: false, adminAuthWorks: false, adminAuthStatus: 0, pepper: false, email: false });
+    assert.deepStrictEqual(await makeRunner(makeEnv(), {}).call("P1", { action: "selfCheck" }), { ok: true, names: true, adminAuth: false, adminAuthWorks: false, adminAuthStatus: 0, pepper: false, email: false });
   });
 
   await test("selfCheck tells a stored-but-rejected admin credential apart from a working one", async () => {
@@ -491,6 +491,88 @@ async function test(name, fn) {
       const probe = env.calls.find((c) => c.method === "GET");
       assert.ok(probe && probe.url.includes("/leaderboards"), "a harmless leaderboards read was used as the probe");
     } finally { env_adminProbe.status = 200; }
+  });
+
+  // ------------------------------------------------------------------ display names
+  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  const DAY_MS = 24 * 60 * 60 * 1000;
+  const setName = (r, player, name, auto) => r.call(player, { action: "setName", displayName: name, auto: auto === true ? "true" : "false" });
+
+  await test("display names: what is valid, and which names count as the same", () => {
+    const { cleanDisplayName, nameKey } = loadScript(makeEnv()).__internals;
+    assert.strictEqual(cleanDisplayName("  Pilot_One "), "Pilot_One", "the ends are trimmed");
+    assert.strictEqual(cleanDisplayName("Ng\u1ecdc"), "Ng\u1ecdc", "accents are fine");
+    for (const bad of ["", "ab", "a".repeat(17), "no@symbols", "two words", "emoji\u{1F600}x", "<script>"]) assert.strictEqual(cleanDisplayName(bad), null, JSON.stringify(bad));
+    assert.strictEqual(nameKey("Ng\u1ecdc"), "ngoc");
+    assert.strictEqual(nameKey("N.g-o_c"), "ngoc");
+    assert.strictEqual(nameKey("\u0110\u1ea1t Pro"), "datpro", "d with a stroke is a d");
+    assert.strictEqual(nameKey("NGOC"), nameKey("ngoc"));
+    assert.notStrictEqual(nameKey("ngoc1"), nameKey("ngoc"));
+  });
+
+  await test("setName: a free name is claimed, bad names are refused", async () => {
+    const env = makeEnv(); const r = makeRunner(env, SECRETS);
+    const next = Math.floor((env.clock.now + WEEK_MS) / 1000);
+    assert.deepStrictEqual(await setName(r, "P1", "Pilot_Hawk"), { ok: true, name: "Pilot_Hawk", nextChangeAt: next });
+    for (const bad of ["ab", "x".repeat(17), "bad@name", "  ", "two words"]) assert.strictEqual((await setName(r, "P2", bad)).error, "invalid_name", bad);
+    assert.strictEqual((await setName(r, "P2", "...")).error, "invalid_name", "a name needs letters or digits");
+    assert.deepStrictEqual(await r.call("P1", { action: "getName" }), { ok: true, name: "Pilot_Hawk", nextChangeAt: next });
+    assert.deepStrictEqual(await r.call("NOBODY", { action: "getName" }), { ok: true, name: "", nextChangeAt: 0 });
+  });
+
+  await test("setName: nobody else can take a name that differs only in case, accents or punctuation", async () => {
+    const env = makeEnv(); const r = makeRunner(env, SECRETS);
+    assert.strictEqual((await setName(r, "P1", "Ng\u1ecdc")).ok, true);
+    for (const same of ["ngoc", "NGOC", "N.g-o.c", "Ng\u1ecdc "]) assert.strictEqual((await setName(r, "P2", same)).error, "name_taken", same);
+    assert.strictEqual((await setName(r, "P2", "Ngoc_2")).ok, true, "a different name is fine");
+    assert.strictEqual((await setName(r, "P1", "Ng\u1ecdc")).ok, true, "the owner keeps it");
+  });
+
+  await test("setName: one change per week, the first manual change is free", async () => {
+    const env = makeEnv(); const r = makeRunner(env, SECRETS);
+    const auto = await setName(r, "P1", "Pilot1a2b", true);
+    assert.deepStrictEqual(auto, { ok: true, name: "Pilot1a2b", nextChangeAt: 0 }, "an automatic name starts no clock");
+
+    const first = await setName(r, "P1", "Hawk_One");
+    assert.strictEqual(first.ok, true, "the first real choice is free");
+    assert.strictEqual(first.nextChangeAt, Math.floor((env.clock.now + WEEK_MS) / 1000));
+
+    env.clock.now += 2 * DAY_MS;
+    const early = await setName(r, "P1", "Hawk_Two");
+    assert.strictEqual(early.error, "name_cooldown");
+    assert.strictEqual(early.retryAfter, 5 * 24 * 60 * 60, "five days to go");
+    assert.deepStrictEqual(await setName(r, "P1", "Hawk_One"), { ok: true, name: "Hawk_One", nextChangeAt: first.nextChangeAt }, "asking for the name already held is no change");
+
+    env.clock.now += 5 * DAY_MS;
+    assert.strictEqual((await setName(r, "P1", "Hawk_Two")).ok, true, "a week later it works again");
+    assert.strictEqual((await setName(r, "P1", "Hawk_Three")).error, "name_cooldown", "and the clock starts over");
+  });
+
+  await test("setName: a name that is given up becomes free; an automatic rename keeps the clock", async () => {
+    const env = makeEnv(); const r = makeRunner(env, SECRETS);
+    assert.strictEqual((await setName(r, "P1", "Old_Name")).ok, true);
+    assert.strictEqual((await setName(r, "P2", "old_name")).error, "name_taken");
+    env.clock.now += WEEK_MS + 1;
+    assert.strictEqual((await setName(r, "P1", "New_Name")).ok, true);
+    assert.strictEqual((await setName(r, "P2", "old_name")).ok, true, "P1 gave it up");
+    assert.strictEqual((await setName(r, "P1", "Third_Name", true)).ok, true, "an automatic change is not held back");
+    assert.strictEqual((await setName(r, "P1", "Fourth_Name")).error, "name_cooldown", "...but it did not reset the weekly clock either");
+  });
+
+  await test("setName: a stale holder never blocks a name", async () => {
+    const env = makeEnv(); const r = makeRunner(env, SECRETS);
+    assert.strictEqual((await setName(r, "P1", "Ghost_Pilot")).ok, true);
+    env.store.delete("np-P1");                              // P1's own record is gone (cut-short cleanup)
+    assert.strictEqual((await setName(r, "P2", "ghost_pilot")).ok, true);
+  });
+
+  await test("deleteData frees the display name for other players", async () => {
+    const env = makeEnv(); const r = makeRunner(env, SECRETS);
+    assert.strictEqual((await setName(r, "P1", "Short_Lived")).ok, true);
+    assert.strictEqual((await setName(r, "P2", "short_lived")).error, "name_taken");
+    assert.strictEqual((await r.call("P1", { action: "deleteData" })).ok, true);
+    assert.deepStrictEqual(await r.call("P1", { action: "getName" }), { ok: true, name: "", nextChangeAt: 0 });
+    assert.strictEqual((await setName(r, "P2", "short_lived")).ok, true);
   });
 
   await test("unknown actions are rejected", async () => {

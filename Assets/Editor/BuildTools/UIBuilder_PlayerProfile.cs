@@ -56,19 +56,19 @@ namespace SpaceHawk.EditorTools
             header1.fontStyle = FontStyles.Bold;
             y -= 32 + 8; // Header1 height + gap -> Description top
 
-            CreateText(panel.transform, "Description", "This name will be shown on the Leaderboard for everyone to see.", 17, TextAlignmentOptions.Center, MutedText,
-                new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(640, 40), "leaderboard.choose_name_desc").Flexible(12f);
+            // No LocalizedText on it: PlayerProfilePanel sets this line itself (what the name is for, or - while the
+            // weekly lock is on - when it can be changed again).
+            TMP_Text nameHint = CreateText(panel.transform, "Description", "This name will be shown on the Leaderboard for everyone to see.", 17, TextAlignmentOptions.Center, MutedText,
+                new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(640, 40), null).Flexible(12f);
             y -= 40 + 20; // Description height + gap -> NameInput top
 
             TMP_InputField nameInput = CreateInputField(panel.transform, "NameInput", "Enter a name...",
                 new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(600, 64), 16, "leaderboard.name_placeholder");
             y -= 64 + 20; // NameInput height + gap -> Confirm button top
 
-            // No RANDOM button - a fresh guest still gets a suggested random name pre-filled into
-            // the field (see PlayerProfilePanel.RefreshNameField), but a signed-in account's name
-            // defaults to their username instead (see AccountManager.Register/SignIn), so a
-            // "reroll" control no longer fits either case; the player can just type over it.
-            Button confirmBtn = CreateTextButton(panel.transform, "ConfirmButton", LoadUI("Normal_Btn"), LoadUI("Hover_Btn"), null,
+            // No RANDOM button: every profile already has a name (the game's "PilotXXXX" for a guest, the
+            // username for a new account - see NameService), and the player can just type over it.
+            Button confirmBtn = CreateTextButton(panel.transform, "ConfirmButton", LoadUI("Normal_Btn"), LoadUI("Hover_Btn"), LoadUI("Disable_Btn"),
                 "CONFIRM", 24, BodyLight, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(280, 64), Image.Type.Sliced, "leaderboard.confirm");
             y -= 64 + 24; // button row height + gap -> Divider1 top
 
@@ -183,6 +183,7 @@ namespace SpaceHawk.EditorTools
 
             PlayerProfilePanel comp = root.AddComponent<PlayerProfilePanel>();
             comp.nameInput = nameInput;
+            comp.nameHintLabel = nameHint;
             comp.confirmButton = confirmBtn;
             comp.closeButton = closeBtn;
             comp.scoreLabel = scoreLabel;

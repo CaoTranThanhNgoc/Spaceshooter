@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using SpaceHawk.Core;
 using SpaceHawk.Online;
 
 namespace SpaceHawk.UI
 {
-    /// <summary>First-run gate shown once at game launch, before the player has any identity (no
-    /// chosen name and no linked account yet) - offers Sign In / Create Account / Continue as
-    /// Guest. Whichever path is taken, HasChosenName() ends up true and this screen never shows
-    /// again (the local save and UGS's own session token remember the choice from then on).</summary>
+    /// <summary>First-run gate shown once on a brand-new install, before the player has answered "who are
+    /// you" - offers Sign In / Create Account / Continue as Guest. Whichever path is taken the answer is
+    /// remembered on the device (SaveManager.MarkIdentityChosen), so this screen never shows again - not
+    /// after logging out, not after returning from a level. A guest needs no further step: every profile
+    /// already has a display name (the game's "PilotXXXX" until the player picks one).</summary>
     public class AuthGatePanel : MonoBehaviour
     {
         public Button loginButton;
@@ -38,20 +40,14 @@ namespace SpaceHawk.UI
         private void OnAccountLinked()
         {
             if (this == null) return;
+            SaveManager.MarkIdentityChosen();
             Close();
-            EnsureNamed();
         }
 
         private void ContinueAsGuest()
         {
+            SaveManager.MarkIdentityChosen();
             Close();
-            EnsureNamed();
-        }
-
-        private void EnsureNamed()
-        {
-            if (LeaderboardManager.HasChosenName()) return;
-            OpenOverlay("PlayerProfilePanel");
         }
 
         private void OpenLogin()

@@ -44,15 +44,30 @@ namespace SpaceHawk.Online
             }
         }
 
-        /// <summary>Downloads the cloud save for whichever account is currently signed in and
-        /// overwrites local progress with it - call right after SignIn, so restoring an account
-        /// on a (possibly new) device actually restores gameplay progress, not just identity.
-        /// Returns false if there was nothing to restore (a brand-new account) or the request
-        /// failed, in which case local progress is left untouched.</summary>
-        public static async Task<bool> PullFromCloud()
+        public enum FetchStatus
+        {
+            /// <summary>The account has a saved profile in the cloud.</summary>
+            Found,
+            /// <summary>The cloud answered: this account has never saved anything (a brand-new account).</summary>
+            NoData,
+            /// <summary>No answer (no connection, service error) - nothing is known about the account's progress.</summary>
+            Failed,
+        }
+
+        public struct FetchResult
+        {
+            public FetchStatus status;
+            public string json;
+        }
+
+        /// <summary>Reads the cloud save of the account signed in right now WITHOUT touching local progress - the
+        /// caller decides what to do with it. "Nothing saved yet" and "could not ask" are different answers: only
+        /// the first may let local progress become the account's (see AccountManager.SignIn), otherwise a hiccup
+        /// in the connection would overwrite an account's real progress with whatever is on this device.</summary>
+        public static async Task<FetchResult> FetchCloudSave()
         {
             await LeaderboardManager.EnsureInitialized();
-            if (!LeaderboardManager.IsReady) return false;
+            if (!LeaderboardManager.IsReady) return new FetchResult { status = FetchStatus.Failed };
 
             try
             {
@@ -60,17 +75,14 @@ namespace SpaceHawk.Online
                     await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { SaveKey }, new PlayerData.LoadOptions());
 
                 if (result.TryGetValue(SaveKey, out Unity.Services.CloudSave.Models.Item item))
-                {
-                    SaveManager.ApplyCloudData(item.Value.GetAsString());
-                    return true;
-                }
+                    return new FetchResult { status = FetchStatus.Found, json = item.Value.GetAsString() };
+                return new FetchResult { status = FetchStatus.NoData };
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"[CloudSaveManager] Pull failed: {e.Message}");
+                Debug.LogWarning($"[CloudSaveManager] Fetch failed: {e.Message}");
+                return new FetchResult { status = FetchStatus.Failed };
             }
-
-            return false;
         }
     }
 }

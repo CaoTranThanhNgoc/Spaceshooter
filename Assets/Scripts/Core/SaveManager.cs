@@ -72,6 +72,12 @@ namespace SpaceHawk.Core
         public bool hasSeenMoveTutorial = false;
 
         public string playerName = "";
+        // Display-name bookkeeping (see NameService). The name was picked by the game, not by hand; the online identity
+        // (PlayerId) whose server record holds the name - another identity registers it again; and the Unix time from
+        // which the name may be changed by hand again (it can be changed once a week).
+        public bool nameIsAuto = false;
+        public string nameRegisteredFor = "";
+        public long nameChangeUnlockUnix = 0;
         public bool accountLinked = false;
         public string accountUsername = "";
         // The e-mail that lets this account get a forgotten password reset (canonical form, see
@@ -152,6 +158,7 @@ namespace SpaceHawk.Core
             if (_data == null) _data = new SaveData();
             NormalizeShips(_data);
             RegenEnergy();
+            if (EnsureName(_data)) Save();
         }
 
         public static void Save()
@@ -571,11 +578,128 @@ namespace SpaceHawk.Core
 
         public static string GetPlayerName() => Data.playerName;
 
-        public static void SetPlayerName(string name)
+        /// <summary>True while the name is one the game picked ("Pilot7k2q") rather than one the player chose.</summary>
+        public static bool IsPlayerNameAuto() => Data.nameIsAuto;
+
+        /// <summary>Remembers the name locally. A changed name is unknown to the server until NameService registers it.</summary>
+        public static void SetPlayerName(string name, bool auto = false)
         {
-            if (Data.playerName == name) return;
+            if (Data.playerName == name && Data.nameIsAuto == auto) return;
+            if (Data.playerName != name) Data.nameRegisteredFor = "";
             Data.playerName = name;
+            Data.nameIsAuto = auto;
             Save();
+        }
+
+        /// <summary>The profile has no name of its own (an account that never had one): it gets a fresh game-picked one.</summary>
+        public static void ClearPlayerName()
+        {
+            Data.playerName = "";
+            EnsureDefaultName();
+        }
+
+        /// <summary>Every profile always has a display name: one the game picked when the player has not chosen yet,
+        /// so a guest shows up on the Leaderboard (and in the profile) under the same name from the start.</summary>
+        public static string EnsureDefaultName()
+        {
+            if (EnsureName(Data)) Save();
+            return Data.playerName;
+        }
+
+        // A profile always has a name; a signed-in account that has not picked one shows up under its account name
+        // (not the game's "PilotXXXX") - on this device right away, whatever the server is doing.
+        private static bool EnsureName(SaveData d)
+        {
+            bool changed = false;
+            if (string.IsNullOrEmpty(d.playerName))
+            {
+                d.playerName = PlayerNameRules.RandomDefaultName();
+                d.nameIsAuto = true;
+                d.nameRegisteredFor = "";
+                d.nameChangeUnlockUnix = 0;
+                changed = true;
+            }
+
+            if (d.accountLinked && d.nameIsAuto && PlayerNameRules.IsGameDefault(d.playerName))
+            {
+                string account = PlayerNameRules.AccountDefault(d.accountUsername);
+                if (account != null)
+                {
+                    d.playerName = account;
+                    d.nameRegisteredFor = "";
+                    changed = true;
+                }
+            }
+            return changed;
+        }
+
+        /// <summary>The server holds `name` for this online identity; `nextChangeAt` is when it may be changed by hand again.</summary>
+        public static void MarkNameRegistered(string playerId, string name, long nextChangeAt)
+        {
+            Data.playerName = name;
+            Data.nameRegisteredFor = playerId ?? "";
+            Data.nameChangeUnlockUnix = nextChangeAt;
+            Save();
+        }
+
+        public static bool IsNameRegisteredFor(string playerId) => !string.IsNullOrEmpty(playerId) && Data.nameRegisteredFor == playerId;
+
+        /// <summary>The name was registered for ANOTHER online identity than `playerId` (the profile moved to a new one).</summary>
+        public static bool IsNameRegisteredForAnother(string playerId) =>
+            !string.IsNullOrEmpty(Data.nameRegisteredFor) && Data.nameRegisteredFor != playerId;
+
+        /// <summary>The name belongs to another online identity than the one signed in now (the profile moved to a
+        /// new identity): what the server knew about it - registration and weekly lock - does not apply.</summary>
+        public static void ForgetNameRegistration()
+        {
+            Data.nameRegisteredFor = "";
+            Data.nameChangeUnlockUnix = 0;
+            Save();
+        }
+
+        public static void SetNameChangeUnlock(long unixSeconds)
+        {
+            if (Data.nameChangeUnlockUnix == unixSeconds) return;
+            Data.nameChangeUnlockUnix = unixSeconds;
+            Save();
+        }
+
+        /// <summary>Seconds until the name may be changed by hand again; 0 when it may be changed now.</summary>
+        public static long GetNameChangeWaitSeconds()
+        {
+            long wait = Data.nameChangeUnlockUnix - DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            return wait > 0 ? wait : 0;
+        }
+
+        // ---- who the player is, on this device (not part of any profile: it must survive logging out)
+
+        private const string IdentityChosenKey = "SpaceHawk.IdentityChosen";
+        private static bool _identityChosenForTests;
+
+        /// <summary>True once the "who are you" gate was answered on this device: Continue as Guest, Create Account
+        /// or Sign In (or a name chosen by hand / an account that predates the gate). The gate is for a brand-new
+        /// install only - logging out or returning from a level never brings it back.</summary>
+        public static bool HasChosenIdentity()
+        {
+            if (Data.accountLinked)
+            {
+                MarkIdentityChosen();
+                return true;
+            }
+            if (!string.IsNullOrEmpty(Data.playerName) && !Data.nameIsAuto) return true;
+            return _skipDiskWrites ? _identityChosenForTests : PlayerPrefs.GetInt(IdentityChosenKey, 0) == 1;
+        }
+
+        public static void MarkIdentityChosen()
+        {
+            if (_skipDiskWrites)
+            {
+                _identityChosenForTests = true;
+                return;
+            }
+            if (PlayerPrefs.GetInt(IdentityChosenKey, 0) == 1) return;
+            PlayerPrefs.SetInt(IdentityChosenKey, 1);
+            PlayerPrefs.Save();
         }
 
         public static string GetRecoveryContact() => Data.recoveryContact ?? "";
@@ -599,11 +723,13 @@ namespace SpaceHawk.Core
         {
             Data.accountLinked = linked;
             Data.accountUsername = linked ? username : "";
+            if (linked) MarkIdentityChosen();
+            EnsureName(Data);   // the account name becomes the display name unless one was chosen
             Save();
         }
 
         /// <summary>Replaces local progress with a cloud snapshot pulled down after signing in to
-        /// an account on this device - see CloudSaveManager.PullFromCloud. Identity fields
+        /// an account on this device - see CloudSaveManager.FetchCloudSave. Identity fields
         /// (account link state, username, display name) are kept as THIS device's AccountManager
         /// just set them, not overwritten by whatever the snapshot happened to hold for them.</summary>
         public static void ApplyCloudData(string json)
@@ -627,6 +753,7 @@ namespace SpaceHawk.Core
             incoming.playerName = Data.playerName;
             CarryDeviceSettings(Data, incoming);
 
+            EnsureName(incoming);
             _data = incoming;
             NormalizeShips(_data);
             RegenEnergy();
@@ -708,6 +835,15 @@ namespace SpaceHawk.Core
             WriteGuestStash();
         }
 
+        /// <summary>The progress put aside is not needed any more - it moved into the account (a brand-new account
+        /// has nothing of its own in the cloud, so the guest progress becomes its starting point).</summary>
+        public static void DiscardGuestStash()
+        {
+            LoadGuestStash();
+            _guestStashJson = null;
+            WriteGuestStash();
+        }
+
         /// <summary>Back to guest play after logging out (or deleting the account): the guest profile that
         /// was put aside comes back exactly as it was - or a fresh one if there never was any guest
         /// progress. The account's progress is not left behind on the device (it lives in the
@@ -733,6 +869,7 @@ namespace SpaceHawk.Core
             CarryDeviceSettings(Data, guest);
             guest.accountLinked = false;
             guest.accountUsername = "";
+            EnsureName(guest);   // a guest that starts fresh gets a name of its own, not the account's
 
             _data = guest;
             NormalizeShips(_data);
@@ -772,6 +909,7 @@ namespace SpaceHawk.Core
             NormalizeShips(_data);
             _guestStashJson = null;
             _guestStashLoaded = true;
+            _identityChosenForTests = false;
             // Tests spend crystals, burn energy and so on - none of that may ever land in the
             // developer's real save file (the static flag resets itself on the next domain reload).
             _skipDiskWrites = true;
